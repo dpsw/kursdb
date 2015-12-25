@@ -1,0 +1,35 @@
+﻿@model KursDB.Models.Service
+
+@{
+    ViewBag.Title = "Edit_Service";
+    Layout = "~/Views/Shared/MainMasterPage.cshtml";
+}
+
+<center>
+    <h2>Edit Service</h2>
+    <br />
+
+    @using (Html.BeginForm("EditService", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, new { @class = "control-label" })
+                <div>
+                    @Html.EditorFor(model => model.Title)
+                    @Html.ValidationMessageFor(model => model.Title)
+                </div>
+                <input type="hidden" name="idService" value="@Model.Service_ID" />
+            </div>
+
+            <div class="form-group">
+                <div>
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+</center>

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<KursDB.Models.Guestbook_View>
+
+@{
+    ViewBag.Title = "Show";
+    Layout = "~/Views/Shared/MainMasterPage.cshtml";
+}
+
+<center><h1>Guestbook</h1></center>
+
+@if ((Session["Name"] != null && Session["Surname"] != null && Session["User_ID"] != null))
+{
+    <center>
+        <a class="btn btn-primary" data-toggle="modal" href="#myModal">Create New Note</a>
+    </center>
+}
+<br />
+
+@foreach (var item in Model)
+{
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <p class="panel-title">
+                @Html.DisplayFor(modelItem => item.Date)
+                <br />
+                @Html.DisplayFor(modelItem => item.Name) @Html.DisplayFor(modelItem => item.Surname)
+            </p>
+        </div>
+        <div class="panel-body">
+            @Html.DisplayFor(modelItem => item.Comment)
+        </div>
+    </div>
+    <center>
+        @if ((Session["Name"] != null && Session["Surname"] != null && Session["User_ID"] != null && (int)Session["User_ID"] == item.User_ID) || (Session["Admin"] != null))
+        {
+            <p>@Html.ActionLink("Edit", "Edit_Note", new { item.Note_ID }) |
+        @Html.ActionLink("Delete", "Delete_Note", new { item.Note_ID })</p>
+        }
+    </center>
+    <br />
+}
+
+<div class="modal" style="background-color:whitesmoke" id="myModal">
+    <div class="modal-header">
+        <center>
+            <h3 class="modal-title">Create New Note</h3>
+        </center>
+    </div>
+    @using (Html.BeginForm("AddNote", "Guestbook", FormMethod.Post))
+    {
+        <div class="modal-body">
+            <center>
+                <textarea class="form-control" name="Comment" rows="5" maxlength="1024" placeholder="Enter your comment..."></textarea>
+            </center>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" value="Add" />
+            <button class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    }
+</div>
+
+<script type="text/javascript">
+    $('#myModal').modal(options)
+</script>

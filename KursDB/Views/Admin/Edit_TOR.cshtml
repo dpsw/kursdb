@@ -1,0 +1,59 @@
+﻿@model KursDB.Models.ToR
+
+@{
+    ViewBag.Title = "Edit_TOR";
+    Layout = "~/Views/Shared/MainMasterPage.cshtml";
+}
+
+<center>
+    <h2>Edit Type of Room</h2>
+    <br />
+
+    @using (Html.BeginForm("EditTOR", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, new { @class = "control-label" })
+                <div>
+                    @Html.EditorFor(model => model.Title)
+                    @Html.ValidationMessageFor(model => model.Title)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Price, new { @class = "control-label" })
+                <div>
+                    @Html.EditorFor(model => model.Price)
+                    @Html.ValidationMessageFor(model => model.Price)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Area, new { @class = "control-label" })
+                <div>
+                    @Html.EditorFor(model => model.Area)
+                    @Html.ValidationMessageFor(model => model.Area)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CoP, new { @class = "control-label" })
+                <div>
+                    @Html.EditorFor(model => model.CoP)
+                    @Html.ValidationMessageFor(model => model.CoP)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div>
+                    <input type="hidden" name="idToR" value="@Model.ToR_ID" />
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+</center>

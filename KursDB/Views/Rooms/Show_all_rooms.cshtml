@@ -1,0 +1,182 @@
+﻿@model IEnumerable<KursDB.Models.RoomsWithServices>
+
+@{
+    ViewBag.Title = "Show_all_rooms";
+    Layout = "~/Views/Shared/MainMasterPage.cshtml";
+}
+
+<center><h1>Rooms Preview</h1></center>
+
+@if (ViewBag.Error != null)
+{
+    {
+        <div class="alert alert-danger">
+            <text>@ViewBag.Error</text>
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        </div>
+    }
+}
+
+@if (ViewBag.OK != null)
+{
+    {
+        <div class="alert alert-success">
+            <text>@ViewBag.OK</text>
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        </div>
+    }
+}
+
+
+        @if (Session["Admin"] != null)
+        {
+            <center>
+                <a class="btn btn-primary" data-toggle="modal" href="#myModal1">Create New Room</a>
+            </center>
+        }
+        <br />
+
+        @foreach (var item in Model)
+        {
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Room № @Html.DisplayFor(modelItem => item.Number)
+                        <br />
+                        Type: @Html.DisplayFor(modelItem => item.Title)
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    @if (Session["Admin"] != null)
+                    {
+                        <p>Room ID: @Html.DisplayFor(modelItem => item.Room_ID)</p>
+                    }
+                    <p class="example-1">
+                        Price: @Html.DisplayFor(modelItem => item.Price)
+                        <br />
+                        Area: @Html.DisplayFor(modelItem => item.Area)
+                        <br />
+                        Count of people: @Html.DisplayFor(modelItem => item.CoP)
+                        <br />
+                        <a title="" href="#"
+                           data-toggle="tooltip"
+                           data-placement="right"
+                           data-original-title="@item.Services">
+                            Service List
+
+                        </a>
+
+
+
+                    </p>
+                    @if (Session["Admin"] == null)
+                    { 
+                    <center>
+                        @using (Html.BeginForm("Reservation", "Rooms", FormMethod.Post))
+                        {
+                            if ((Session["Name"] != null && Session["Surname"] != null && Session["User_ID"] != null))
+                            {
+                                <input value="@item.Room_ID" type="text" name="id" style="display: none" />
+                                <a id="id_@item.Room_ID" class="btn btn-primary" data-toggle="modal" href="#myModal">Reserve</a>
+                                <script type="text/javascript">
+                                    $('#id_@item.Room_ID').click(function () {
+                                        $('#idRoom').attr('value', $('#id_@item.Room_ID').parent().find('input').val());
+                                    });
+                                </script>
+                            }
+                        }
+                    </center>
+                    }
+                </div>
+            </div>
+            <center>
+                @if (Session["Admin"] != null)
+                {
+                    <p> @Html.ActionLink("Edit", "Edit_Room", new { item.Room_ID, item.Number }) |
+                @Html.ActionLink("Delete", "Delete_Room", new { item.Room_ID })</p>
+                }
+            </center>
+        }
+
+        <div class="modal" style="background-color:whitesmoke" id="myModal">
+            <div class="modal-header">
+                <center>
+                    <h3 class="modal-title">Reservation</h3>
+                </center>
+            </div>
+            @using (Html.BeginForm("Reservation", "Rooms", FormMethod.Post))
+            {
+                <div class="modal-body">
+                    <center>
+                        <p>Date From:</p><input data-date-format="dd-mm-yyyy" type="datetime" class="span2" id="dpd1" name="DateFrom" />
+                        <p>Date To:</p><input data-date-format="dd-mm-yyyy" type="datetime" class="span2" id="dpd2" name="DateTo" />
+                        <input id="idRoom" type="text" name="Room_ID" style="display: none" />
+                    </center>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Reserve" />
+                    <button class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            }
+        </div>
+
+        <div class="modal" style="background-color:whitesmoke" id="myModal1">
+            <div class="modal-header">
+                <center>
+                    <h3 class="modal-title">Create New Room</h3>
+                </center>
+            </div>
+            @using (Html.BeginForm("AddRoom", "Rooms", FormMethod.Post))
+            {
+                <div class="modal-body">
+                    <center>
+                        <input type="text" placeholder="Enter number for room..." class="form-control" name="Number">
+                        <br />
+                        <input type="text" placeholder="Enter type of room..." class="form-control" name="ToR">
+                    </center>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Add" />
+                    <button class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            }
+        </div>
+
+    <script type="text/javascript">
+        $('#myModal').modal(options);
+    </script>
+
+    <script type="text/javascript">
+        $('#myModal1').modal(options);
+    </script>
+
+    <script>
+        jQuery(document).ready(function ($) {
+            $('.example-1').tooltip({
+                trigger: "hover",
+                selector: "a[data-toggle=tooltip]"
+            })
+        })</script>
+
+    <script type="text/javascript">
+        $('.datepicker').datepicker();
+    </script>
+    <script type="text/javascript">
+        var nowTemp = new Date();
+        var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+        var checkin = $('#dpd1').datepicker({
+            onRender: function (date) {
+                return date.valueOf() < now.valueOf() ? 'disabled' : '';
+            }
+        }).on('changeDate', function (ev) {
+            checkin.hide();
+        }).data('datepicker');
+        var checkout = $('#dpd2').datepicker({
+            onRender: function (date) {
+                return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+            }
+        }).on('changeDate', function (ev) {
+            checkout.hide();
+        }).data('datepicker');
+    </script>

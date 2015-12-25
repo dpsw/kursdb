@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5e599dfed23c4d938e98c0fe8fa7c888" Name="Diagram1">
+        <EntityTypeShape EntityType="KursDBModel.Guestbook" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="KursDBModel.News" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KursDBModel.Reservation" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KursDBModel.Rooms" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="KursDBModel.Service" Width="1.5" PointX="1.5" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KursDBModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KursDBModel.ToR" Width="1.5" PointX="1.5" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KursDBModel.ToR_Services" Width="1.5" PointX="3.75" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="KursDBModel.User_Info" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="KursDBModel.Users" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KursDBModel.Guestbook_View" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KursDBModel.News_View" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KursDBModel.Reserve_View" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KursDBModel.Room_View" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KursDBModel.Rooms_View" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KursDBModel.Services_View" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KursDBModel.ServiceShow" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KursDBModel.ToR_View" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KursDBModel.ToRs_View" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KursDBModel.TypeShow" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KursDBModel.Users_View" Width="1.5" PointX="9.75" PointY="9.75" IsExpanded="true" />
+        <AssociationConnector Association="KursDBModel.FK_Guestbook_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="KursDBModel.FK_News_Users1" ManuallyRouted="false" />
+        <AssociationConnector Association="KursDBModel.FK_Reservation_Rooms" ManuallyRouted="false" />
+        <AssociationConnector Association="KursDBModel.FK_Reservation_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="KursDBModel.FK_Rooms_ToR" ManuallyRouted="false" />
+        <AssociationConnector Association="KursDBModel.FK_ToR_Services_Service1" ManuallyRouted="false" />
+        <AssociationConnector Association="KursDBModel.FK_ToR_Services_ToR" ManuallyRouted="false" />
+        <AssociationConnector Association="KursDBModel.FK_User_Info_Users1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

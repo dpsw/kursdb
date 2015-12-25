@@ -1,0 +1,1475 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище KursDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Guestbook">
+          <Key>
+            <PropertyRef Name="Note_ID" />
+          </Key>
+          <Property Name="Note_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_ID" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="1024" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="News_ID" />
+          </Key>
+          <Property Name="News_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_ID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1024" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="Reserve_ID" />
+          </Key>
+          <Property Name="Reserve_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_ID" Type="int" Nullable="false" />
+          <Property Name="Room_ID" Type="int" Nullable="false" />
+          <Property Name="Date_From" Type="datetime" Nullable="false" />
+          <Property Name="Date_To" Type="datetime" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rooms">
+          <Key>
+            <PropertyRef Name="Room_ID" />
+          </Key>
+          <Property Name="Room_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="ToR_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="Service_ID" />
+          </Key>
+          <Property Name="Service_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="ToR">
+          <Key>
+            <PropertyRef Name="ToR_ID" />
+          </Key>
+          <Property Name="ToR_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Area" Type="int" Nullable="false" />
+          <Property Name="CoP" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ToR_Services">
+          <Key>
+            <PropertyRef Name="ToRS_ID" />
+          </Key>
+          <Property Name="ToRS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ToR_ID" Type="int" Nullable="false" />
+          <Property Name="Service_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Info">
+          <Key>
+            <PropertyRef Name="Mobile" />
+          </Key>
+          <Property Name="User_ID" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="11" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="isAdmin" Type="bit" Nullable="false" />
+          <Property Name="LastEnter" Type="datetime" />
+          <Property Name="EnterCount" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "KursDB.dbo.Guestbook_View" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Guestbook_View">
+          <Key>
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="User_ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Surname" />
+            <PropertyRef Name="Comment" />
+            <PropertyRef Name="Note_ID" />
+          </Key>
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="User_ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="1024" Nullable="false" />
+          <Property Name="Note_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "KursDB.dbo.News_View" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="News_View">
+          <Key>
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="News_ID" />
+          </Key>
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1024" Nullable="false" />
+          <Property Name="News_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "KursDB.dbo.Reserve_View" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Reserve_View">
+          <Key>
+            <PropertyRef Name="Number" />
+            <PropertyRef Name="User_ID" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Date_From" />
+            <PropertyRef Name="Date_To" />
+          </Key>
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="User_ID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Date_From" Type="datetime" Nullable="false" />
+          <Property Name="Date_To" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "KursDB.dbo.Room_View" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Room_View">
+          <Key>
+            <PropertyRef Name="Room_ID" />
+            <PropertyRef Name="Number" />
+          </Key>
+          <Property Name="Room_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "KursDB.dbo.Rooms_View" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Rooms_View">
+          <Key>
+            <PropertyRef Name="Room_ID" />
+            <PropertyRef Name="Number" />
+            <PropertyRef Name="ToR_ID" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="Area" />
+            <PropertyRef Name="CoP" />
+          </Key>
+          <Property Name="Room_ID" Type="int" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="ToR_ID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Area" Type="int" Nullable="false" />
+          <Property Name="CoP" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "KursDB.dbo.Services_View" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Services_View">
+          <Key>
+            <PropertyRef Name="Service_ID" />
+            <PropertyRef Name="Title" />
+          </Key>
+          <Property Name="Service_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "KursDB.dbo.ServiceShow" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="ServiceShow">
+          <Key>
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="Service_ID" />
+            <PropertyRef Name="ToR_ID" />
+          </Key>
+          <Property Name="Title" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Service_ID" Type="int" Nullable="false" />
+          <Property Name="ToR_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "KursDB.dbo.ToR_View" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="ToR_View">
+          <Key>
+            <PropertyRef Name="ToR_ID" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="Area" />
+            <PropertyRef Name="CoP" />
+          </Key>
+          <Property Name="ToR_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Area" Type="int" Nullable="false" />
+          <Property Name="CoP" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "KursDB.dbo.ToRs_View" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="ToRs_View">
+          <Key>
+            <PropertyRef Name="ToR_ID" />
+            <PropertyRef Name="Title" />
+          </Key>
+          <Property Name="ToR_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "KursDB.dbo.TypeShow" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="TypeShow">
+          <Key>
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="ToR_ID" />
+            <PropertyRef Name="Room_ID" />
+          </Key>
+          <Property Name="Title" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="ToR_ID" Type="int" Nullable="false" />
+          <Property Name="Room_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "KursDB.dbo.Users_View" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Users_View">
+          <Key>
+            <PropertyRef Name="User_ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Surname" />
+            <PropertyRef Name="EnterCount" />
+            <PropertyRef Name="isAdmin" />
+          </Key>
+          <Property Name="Row" Type="bigint" />
+          <Property Name="User_ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="LastEnter" Type="datetime" />
+          <Property Name="EnterCount" Type="int" Nullable="false" />
+          <Property Name="isAdmin" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Guestbook_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Guestbook" Type="Self.Guestbook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Guestbook">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_Users1">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Rooms">
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="Room_ID" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="Room_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rooms_ToR">
+          <End Role="ToR" Type="Self.ToR" Multiplicity="0..1" />
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ToR">
+              <PropertyRef Name="ToR_ID" />
+            </Principal>
+            <Dependent Role="Rooms">
+              <PropertyRef Name="ToR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToR_Services_Service1">
+          <End Role="Service" Type="Self.Service" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ToR_Services" Type="Self.ToR_Services" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Service_ID" />
+            </Principal>
+            <Dependent Role="ToR_Services">
+              <PropertyRef Name="Service_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToR_Services_ToR">
+          <End Role="ToR" Type="Self.ToR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ToR_Services" Type="Self.ToR_Services" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ToR">
+              <PropertyRef Name="ToR_ID" />
+            </Principal>
+            <Dependent Role="ToR_Services">
+              <PropertyRef Name="ToR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Info_Users1">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User_Info" Type="Self.User_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="User_Info">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Add_Room" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Number" Type="int" Mode="In" />
+          <Parameter Name="ToR" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="AddServiceToToR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ServiceID" Type="int" Mode="In" />
+          <Parameter Name="ToRID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AllReservation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="AllUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Name" Type="nvarchar" MaxLength="32" Nullable="false" />
+                <Property Name="Surname" Type="nvarchar" MaxLength="32" Nullable="false" />
+                <Property Name="Mobile" Type="nvarchar" MaxLength="11" Nullable="false" />
+                <Property Name="Email" Type="nvarchar" MaxLength="64" Nullable="false" />
+                <Property Name="LastEnter" Type="datetime" />
+                <Property Name="EnterCount" Type="int" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="CountofPageNews" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="itemsonpage" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Delete_Comment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NoteID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Delete_News" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NewsID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Delete_Room" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RoomID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Delete_Service" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ServiceID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Delete_ToR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ToRID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteReserveTable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="go" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteServiceFromTOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ServiceID" Type="int" Mode="In" />
+          <Parameter Name="ToRID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="PagingNews" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CountItemOnPage" Type="int" Mode="In" />
+          <Parameter Name="Page" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ReserveFromDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Number" Type="int" Nullable="false" />
+                <Property Name="Date" Type="datetime" Nullable="false" />
+                <Property Name="Date_From" Type="datetime" Nullable="false" />
+                <Property Name="Date_To" Type="datetime" Nullable="false" />
+                <Property Name="Name" Type="nvarchar" MaxLength="32" Nullable="false" />
+                <Property Name="Surname" Type="nvarchar" MaxLength="32" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="UpdateEntries" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateNews" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NewsID" Type="int" Mode="In" />
+          <Parameter Name="Title" Type="nvarchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateNote" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NoteID" Type="int" Mode="In" />
+          <Parameter Name="Comment" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="UpdatePassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateRoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RoomID" Type="int" Mode="In" />
+          <Parameter Name="Number" Type="int" Mode="In" />
+          <Parameter Name="TypeTitle" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateService" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ServiceID" Type="int" Mode="In" />
+          <Parameter Name="Title" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateTOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TORID" Type="int" Mode="In" />
+          <Parameter Name="Title" Type="nvarchar" Mode="In" />
+          <Parameter Name="Price" Type="int" Mode="In" />
+          <Parameter Name="COP" Type="int" Mode="In" />
+          <Parameter Name="Area" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="Хранилище KursDBModelContainer">
+          <EntitySet Name="Guestbook" EntityType="Self.Guestbook" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ToR" EntityType="Self.ToR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ToR_Services" EntityType="Self.ToR_Services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Info" EntityType="Self.User_Info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Guestbook_View" EntityType="Self.Guestbook_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Guestbook_View].[Date] AS [Date], 
+    [Guestbook_View].[User_ID] AS [User_ID], 
+    [Guestbook_View].[Name] AS [Name], 
+    [Guestbook_View].[Surname] AS [Surname], 
+    [Guestbook_View].[Comment] AS [Comment], 
+    [Guestbook_View].[Note_ID] AS [Note_ID]
+    FROM [dbo].[Guestbook_View] AS [Guestbook_View]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="News_View" EntityType="Self.News_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [News_View].[Date] AS [Date], 
+    [News_View].[Title] AS [Title], 
+    [News_View].[Description] AS [Description], 
+    [News_View].[News_ID] AS [News_ID]
+    FROM [dbo].[News_View] AS [News_View]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Reserve_View" EntityType="Self.Reserve_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Reserve_View].[Number] AS [Number], 
+    [Reserve_View].[User_ID] AS [User_ID], 
+    [Reserve_View].[Date] AS [Date], 
+    [Reserve_View].[Date_From] AS [Date_From], 
+    [Reserve_View].[Date_To] AS [Date_To]
+    FROM [dbo].[Reserve_View] AS [Reserve_View]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Room_View" EntityType="Self.Room_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Room_View].[Room_ID] AS [Room_ID], 
+    [Room_View].[Number] AS [Number]
+    FROM [dbo].[Room_View] AS [Room_View]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Rooms_View" EntityType="Self.Rooms_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Rooms_View].[Room_ID] AS [Room_ID], 
+    [Rooms_View].[Number] AS [Number], 
+    [Rooms_View].[ToR_ID] AS [ToR_ID], 
+    [Rooms_View].[Title] AS [Title], 
+    [Rooms_View].[Price] AS [Price], 
+    [Rooms_View].[Area] AS [Area], 
+    [Rooms_View].[CoP] AS [CoP]
+    FROM [dbo].[Rooms_View] AS [Rooms_View]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Services_View" EntityType="Self.Services_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Services_View].[Service_ID] AS [Service_ID], 
+    [Services_View].[Title] AS [Title]
+    FROM [dbo].[Services_View] AS [Services_View]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ServiceShow" EntityType="Self.ServiceShow" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ServiceShow].[Title] AS [Title], 
+    [ServiceShow].[Service_ID] AS [Service_ID], 
+    [ServiceShow].[ToR_ID] AS [ToR_ID]
+    FROM [dbo].[ServiceShow] AS [ServiceShow]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ToR_View" EntityType="Self.ToR_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ToR_View].[ToR_ID] AS [ToR_ID], 
+    [ToR_View].[Title] AS [Title], 
+    [ToR_View].[Price] AS [Price], 
+    [ToR_View].[Area] AS [Area], 
+    [ToR_View].[CoP] AS [CoP]
+    FROM [dbo].[ToR_View] AS [ToR_View]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ToRs_View" EntityType="Self.ToRs_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ToRs_View].[ToR_ID] AS [ToR_ID], 
+    [ToRs_View].[Title] AS [Title]
+    FROM [dbo].[ToRs_View] AS [ToRs_View]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TypeShow" EntityType="Self.TypeShow" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TypeShow].[Title] AS [Title], 
+    [TypeShow].[ToR_ID] AS [ToR_ID], 
+    [TypeShow].[Room_ID] AS [Room_ID]
+    FROM [dbo].[TypeShow] AS [TypeShow]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Users_View" EntityType="Self.Users_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Users_View].[Row] AS [Row], 
+    [Users_View].[User_ID] AS [User_ID], 
+    [Users_View].[Name] AS [Name], 
+    [Users_View].[Surname] AS [Surname], 
+    [Users_View].[LastEnter] AS [LastEnter], 
+    [Users_View].[EnterCount] AS [EnterCount], 
+    [Users_View].[isAdmin] AS [isAdmin]
+    FROM [dbo].[Users_View] AS [Users_View]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Guestbook_Users" Association="Self.FK_Guestbook_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Guestbook" EntitySet="Guestbook" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_Users1" Association="Self.FK_News_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Rooms" Association="Self.FK_Reservation_Rooms">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Users" Association="Self.FK_Reservation_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rooms_ToR" Association="Self.FK_Rooms_ToR">
+            <End Role="ToR" EntitySet="ToR" />
+            <End Role="Rooms" EntitySet="Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToR_Services_Service1" Association="Self.FK_ToR_Services_Service1">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ToR_Services" EntitySet="ToR_Services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToR_Services_ToR" Association="Self.FK_ToR_Services_ToR">
+            <End Role="ToR" EntitySet="ToR" />
+            <End Role="ToR_Services" EntitySet="ToR_Services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Info_Users1" Association="Self.FK_User_Info_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_Info" EntitySet="User_Info" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KursDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="AllUsers_Result">
+          <Property Name="Name" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mobile" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastEnter" Type="DateTime" />
+          <Property Name="EnterCount" Type="Int32" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ReserveFromDate_Result">
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Date_From" Type="DateTime" Nullable="false" />
+          <Property Name="Date_To" Type="DateTime" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Guestbook">
+          <Key>
+            <PropertyRef Name="Note_ID" />
+          </Key>
+          <Property Name="Note_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Guestbook_Users" FromRole="Guestbook" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="News_ID" />
+          </Key>
+          <Property Name="News_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_News_Users1" FromRole="News" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="Reserve_ID" />
+          </Key>
+          <Property Name="Reserve_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="Room_ID" Type="Int32" Nullable="false" />
+          <Property Name="Date_From" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Date_To" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Rooms" Relationship="Self.FK_Reservation_Rooms" FromRole="Reservation" ToRole="Rooms" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Reservation_Users" FromRole="Reservation" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Rooms">
+          <Key>
+            <PropertyRef Name="Room_ID" />
+          </Key>
+          <Property Name="Room_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="ToR_ID" Type="Int32" />
+          <NavigationProperty Name="Reservation" Relationship="Self.FK_Reservation_Rooms" FromRole="Rooms" ToRole="Reservation" />
+          <NavigationProperty Name="ToR" Relationship="Self.FK_Rooms_ToR" FromRole="Rooms" ToRole="ToR" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="Service_ID" />
+          </Key>
+          <Property Name="Service_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ToR_Services" Relationship="Self.FK_ToR_Services_Service1" FromRole="Service" ToRole="ToR_Services" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="ToR">
+          <Key>
+            <PropertyRef Name="ToR_ID" />
+          </Key>
+          <Property Name="ToR_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Area" Type="Int32" Nullable="false" />
+          <Property Name="CoP" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Rooms" Relationship="Self.FK_Rooms_ToR" FromRole="ToR" ToRole="Rooms" />
+          <NavigationProperty Name="ToR_Services" Relationship="Self.FK_ToR_Services_ToR" FromRole="ToR" ToRole="ToR_Services" />
+        </EntityType>
+        <EntityType Name="ToR_Services">
+          <Key>
+            <PropertyRef Name="ToRS_ID" />
+          </Key>
+          <Property Name="ToRS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ToR_ID" Type="Int32" Nullable="false" />
+          <Property Name="Service_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_ToR_Services_Service1" FromRole="ToR_Services" ToRole="Service" />
+          <NavigationProperty Name="ToR" Relationship="Self.FK_ToR_Services_ToR" FromRole="ToR_Services" ToRole="ToR" />
+        </EntityType>
+        <EntityType Name="User_Info">
+          <Key>
+            <PropertyRef Name="Mobile" />
+          </Key>
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mobile" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_Info_Users1" FromRole="User_Info" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="LastEnter" Type="DateTime" Precision="3" />
+          <Property Name="EnterCount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Guestbook" Relationship="Self.FK_Guestbook_Users" FromRole="Users" ToRole="Guestbook" />
+          <NavigationProperty Name="News" Relationship="Self.FK_News_Users1" FromRole="Users" ToRole="News" />
+          <NavigationProperty Name="Reservation" Relationship="Self.FK_Reservation_Users" FromRole="Users" ToRole="Reservation" />
+          <NavigationProperty Name="User_Info" Relationship="Self.FK_User_Info_Users1" FromRole="Users" ToRole="User_Info" />
+        </EntityType>
+        <EntityType Name="Guestbook_View">
+          <Key>
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="User_ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Surname" />
+            <PropertyRef Name="Comment" />
+            <PropertyRef Name="Note_ID" />
+          </Key>
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Note_ID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="News_View">
+          <Key>
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="News_ID" />
+          </Key>
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Title" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="News_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Reserve_View">
+          <Key>
+            <PropertyRef Name="Number" />
+            <PropertyRef Name="User_ID" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Date_From" />
+            <PropertyRef Name="Date_To" />
+          </Key>
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Date_From" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Date_To" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Room_View">
+          <Key>
+            <PropertyRef Name="Room_ID" />
+            <PropertyRef Name="Number" />
+          </Key>
+          <Property Name="Room_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rooms_View">
+          <Key>
+            <PropertyRef Name="Room_ID" />
+            <PropertyRef Name="Number" />
+            <PropertyRef Name="ToR_ID" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="Area" />
+            <PropertyRef Name="CoP" />
+          </Key>
+          <Property Name="Room_ID" Type="Int32" Nullable="false" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="ToR_ID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Area" Type="Int32" Nullable="false" />
+          <Property Name="CoP" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Services_View">
+          <Key>
+            <PropertyRef Name="Service_ID" />
+            <PropertyRef Name="Title" />
+          </Key>
+          <Property Name="Service_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceShow">
+          <Key>
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="Service_ID" />
+            <PropertyRef Name="ToR_ID" />
+          </Key>
+          <Property Name="Title" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Service_ID" Type="Int32" Nullable="false" />
+          <Property Name="ToR_ID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ToR_View">
+          <Key>
+            <PropertyRef Name="ToR_ID" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="Area" />
+            <PropertyRef Name="CoP" />
+          </Key>
+          <Property Name="ToR_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Area" Type="Int32" Nullable="false" />
+          <Property Name="CoP" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ToRs_View">
+          <Key>
+            <PropertyRef Name="ToR_ID" />
+            <PropertyRef Name="Title" />
+          </Key>
+          <Property Name="ToR_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeShow">
+          <Key>
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="ToR_ID" />
+            <PropertyRef Name="Room_ID" />
+          </Key>
+          <Property Name="Title" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ToR_ID" Type="Int32" Nullable="false" />
+          <Property Name="Room_ID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users_View">
+          <Key>
+            <PropertyRef Name="User_ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Surname" />
+            <PropertyRef Name="EnterCount" />
+            <PropertyRef Name="isAdmin" />
+          </Key>
+          <Property Name="Row" Type="Int64" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastEnter" Type="DateTime" Precision="3" />
+          <Property Name="EnterCount" Type="Int32" Nullable="false" />
+          <Property Name="isAdmin" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Guestbook_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Guestbook" Type="Self.Guestbook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Guestbook">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_Users1">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Rooms">
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="Room_ID" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="Room_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rooms_ToR">
+          <End Role="ToR" Type="Self.ToR" Multiplicity="0..1" />
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ToR">
+              <PropertyRef Name="ToR_ID" />
+            </Principal>
+            <Dependent Role="Rooms">
+              <PropertyRef Name="ToR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToR_Services_Service1">
+          <End Role="Service" Type="Self.Service" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ToR_Services" Type="Self.ToR_Services" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Service_ID" />
+            </Principal>
+            <Dependent Role="ToR_Services">
+              <PropertyRef Name="Service_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToR_Services_ToR">
+          <End Role="ToR" Type="Self.ToR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ToR_Services" Type="Self.ToR_Services" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ToR">
+              <PropertyRef Name="ToR_ID" />
+            </Principal>
+            <Dependent Role="ToR_Services">
+              <PropertyRef Name="ToR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Info_Users1">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User_Info" Type="Self.User_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="User_Info">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KursDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Guestbook" EntityType="Self.Guestbook" />
+          <EntitySet Name="News" EntityType="Self.News" />
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" />
+          <EntitySet Name="Rooms" EntityType="Self.Rooms" />
+          <EntitySet Name="Service" EntityType="Self.Service" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="ToR" EntityType="Self.ToR" />
+          <EntitySet Name="ToR_Services" EntityType="Self.ToR_Services" />
+          <EntitySet Name="User_Info" EntityType="Self.User_Info" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="Guestbook_View" EntityType="Self.Guestbook_View" />
+          <EntitySet Name="News_View" EntityType="Self.News_View" />
+          <EntitySet Name="Reserve_View" EntityType="Self.Reserve_View" />
+          <EntitySet Name="Room_View" EntityType="Self.Room_View" />
+          <EntitySet Name="Rooms_View" EntityType="Self.Rooms_View" />
+          <EntitySet Name="Services_View" EntityType="Self.Services_View" />
+          <EntitySet Name="ServiceShow" EntityType="Self.ServiceShow" />
+          <EntitySet Name="ToR_View" EntityType="Self.ToR_View" />
+          <EntitySet Name="ToRs_View" EntityType="Self.ToRs_View" />
+          <EntitySet Name="TypeShow" EntityType="Self.TypeShow" />
+          <EntitySet Name="Users_View" EntityType="Self.Users_View" />
+          <AssociationSet Name="FK_Guestbook_Users" Association="Self.FK_Guestbook_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Guestbook" EntitySet="Guestbook" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_Users1" Association="Self.FK_News_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Rooms" Association="Self.FK_Reservation_Rooms">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Users" Association="Self.FK_Reservation_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rooms_ToR" Association="Self.FK_Rooms_ToR">
+            <End Role="ToR" EntitySet="ToR" />
+            <End Role="Rooms" EntitySet="Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToR_Services_Service1" Association="Self.FK_ToR_Services_Service1">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ToR_Services" EntitySet="ToR_Services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToR_Services_ToR" Association="Self.FK_ToR_Services_ToR">
+            <End Role="ToR" EntitySet="ToR" />
+            <End Role="ToR_Services" EntitySet="ToR_Services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Info_Users1" Association="Self.FK_User_Info_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_Info" EntitySet="User_Info" />
+          </AssociationSet>
+          <FunctionImport Name="AllUsers" ReturnType="Collection(KursDBModel.AllUsers_Result)" IsComposable="true" />
+          <FunctionImport Name="ReserveFromDate" ReturnType="Collection(KursDBModel.ReserveFromDate_Result)" IsComposable="true">
+            <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Add_Room">
+            <Parameter Name="Number" Mode="In" Type="Int32" />
+            <Parameter Name="ToR" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddServiceToToR">
+            <Parameter Name="ServiceID" Mode="In" Type="Int32" />
+            <Parameter Name="ToRID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AllReservation">
+            <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Delete_Comment">
+            <Parameter Name="NoteID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Delete_News">
+            <Parameter Name="NewsID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Delete_Room">
+            <Parameter Name="RoomID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Delete_Service">
+            <Parameter Name="ServiceID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Delete_ToR">
+            <Parameter Name="ToRID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteReserveTable">
+            <Parameter Name="go" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteServiceFromTOR">
+            <Parameter Name="ServiceID" Mode="In" Type="Int32" />
+            <Parameter Name="ToRID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="PagingNews" ReturnType="Collection(KursDBModel.PagingNews_Result)">
+            <Parameter Name="CountItemOnPage" Mode="In" Type="Int32" />
+            <Parameter Name="Page" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="UpdateEntries">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateNews">
+            <Parameter Name="NewsID" Mode="In" Type="Int32" />
+            <Parameter Name="Title" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateNote">
+            <Parameter Name="NoteID" Mode="In" Type="Int32" />
+            <Parameter Name="Comment" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdatePassword">
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateRoom">
+            <Parameter Name="RoomID" Mode="In" Type="Int32" />
+            <Parameter Name="Number" Mode="In" Type="Int32" />
+            <Parameter Name="TypeTitle" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateService">
+            <Parameter Name="ServiceID" Mode="In" Type="Int32" />
+            <Parameter Name="Title" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateTOR">
+            <Parameter Name="TORID" Mode="In" Type="Int32" />
+            <Parameter Name="Title" Mode="In" Type="String" />
+            <Parameter Name="Price" Mode="In" Type="Int32" />
+            <Parameter Name="COP" Mode="In" Type="Int32" />
+            <Parameter Name="Area" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="PagingNews_Result">
+          <Property Type="Int64" Name="Row" Nullable="true" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="1024" />
+          <Property Type="Int32" Name="News_ID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище KursDBModelContainer" CdmEntityContainer="KursDBEntities">
+          <EntitySetMapping Name="Guestbook">
+            <EntityTypeMapping TypeName="KursDBModel.Guestbook">
+              <MappingFragment StoreEntitySet="Guestbook">
+                <ScalarProperty Name="Note_ID" ColumnName="Note_ID" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="KursDBModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="News_ID" ColumnName="News_ID" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservation">
+            <EntityTypeMapping TypeName="KursDBModel.Reservation">
+              <MappingFragment StoreEntitySet="Reservation">
+                <ScalarProperty Name="Reserve_ID" ColumnName="Reserve_ID" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Room_ID" ColumnName="Room_ID" />
+                <ScalarProperty Name="Date_From" ColumnName="Date_From" />
+                <ScalarProperty Name="Date_To" ColumnName="Date_To" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rooms">
+            <EntityTypeMapping TypeName="KursDBModel.Rooms">
+              <MappingFragment StoreEntitySet="Rooms">
+                <ScalarProperty Name="Room_ID" ColumnName="Room_ID" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="ToR_ID" ColumnName="ToR_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Service">
+            <EntityTypeMapping TypeName="KursDBModel.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="Service_ID" ColumnName="Service_ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="KursDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ToR">
+            <EntityTypeMapping TypeName="KursDBModel.ToR">
+              <MappingFragment StoreEntitySet="ToR">
+                <ScalarProperty Name="ToR_ID" ColumnName="ToR_ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="CoP" ColumnName="CoP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ToR_Services">
+            <EntityTypeMapping TypeName="KursDBModel.ToR_Services">
+              <MappingFragment StoreEntitySet="ToR_Services">
+                <ScalarProperty Name="ToRS_ID" ColumnName="ToRS_ID" />
+                <ScalarProperty Name="ToR_ID" ColumnName="ToR_ID" />
+                <ScalarProperty Name="Service_ID" ColumnName="Service_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Info">
+            <EntityTypeMapping TypeName="KursDBModel.User_Info">
+              <MappingFragment StoreEntitySet="User_Info">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="KursDBModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+                <ScalarProperty Name="LastEnter" ColumnName="LastEnter" />
+                <ScalarProperty Name="EnterCount" ColumnName="EnterCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Guestbook_View">
+            <EntityTypeMapping TypeName="KursDBModel.Guestbook_View">
+              <MappingFragment StoreEntitySet="Guestbook_View">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Note_ID" ColumnName="Note_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News_View">
+            <EntityTypeMapping TypeName="KursDBModel.News_View">
+              <MappingFragment StoreEntitySet="News_View">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="News_ID" ColumnName="News_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reserve_View">
+            <EntityTypeMapping TypeName="KursDBModel.Reserve_View">
+              <MappingFragment StoreEntitySet="Reserve_View">
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Date_From" ColumnName="Date_From" />
+                <ScalarProperty Name="Date_To" ColumnName="Date_To" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Room_View">
+            <EntityTypeMapping TypeName="KursDBModel.Room_View">
+              <MappingFragment StoreEntitySet="Room_View">
+                <ScalarProperty Name="Room_ID" ColumnName="Room_ID" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rooms_View">
+            <EntityTypeMapping TypeName="KursDBModel.Rooms_View">
+              <MappingFragment StoreEntitySet="Rooms_View">
+                <ScalarProperty Name="Room_ID" ColumnName="Room_ID" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="ToR_ID" ColumnName="ToR_ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="CoP" ColumnName="CoP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services_View">
+            <EntityTypeMapping TypeName="KursDBModel.Services_View">
+              <MappingFragment StoreEntitySet="Services_View">
+                <ScalarProperty Name="Service_ID" ColumnName="Service_ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceShow">
+            <EntityTypeMapping TypeName="KursDBModel.ServiceShow">
+              <MappingFragment StoreEntitySet="ServiceShow">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Service_ID" ColumnName="Service_ID" />
+                <ScalarProperty Name="ToR_ID" ColumnName="ToR_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ToR_View">
+            <EntityTypeMapping TypeName="KursDBModel.ToR_View">
+              <MappingFragment StoreEntitySet="ToR_View">
+                <ScalarProperty Name="ToR_ID" ColumnName="ToR_ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="CoP" ColumnName="CoP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ToRs_View">
+            <EntityTypeMapping TypeName="KursDBModel.ToRs_View">
+              <MappingFragment StoreEntitySet="ToRs_View">
+                <ScalarProperty Name="ToR_ID" ColumnName="ToR_ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeShow">
+            <EntityTypeMapping TypeName="KursDBModel.TypeShow">
+              <MappingFragment StoreEntitySet="TypeShow">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ToR_ID" ColumnName="ToR_ID" />
+                <ScalarProperty Name="Room_ID" ColumnName="Room_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users_View">
+            <EntityTypeMapping TypeName="KursDBModel.Users_View">
+              <MappingFragment StoreEntitySet="Users_View">
+                <ScalarProperty Name="Row" ColumnName="Row" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="LastEnter" ColumnName="LastEnter" />
+                <ScalarProperty Name="EnterCount" ColumnName="EnterCount" />
+                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="Хранилище KursDBModel.AllUsers" FunctionImportName="AllUsers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KursDBModel.AllUsers_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastEnter" ColumnName="LastEnter" />
+                <ScalarProperty Name="EnterCount" ColumnName="EnterCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="Хранилище KursDBModel.ReserveFromDate" FunctionImportName="ReserveFromDate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KursDBModel.ReserveFromDate_Result">
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Date_From" ColumnName="Date_From" />
+                <ScalarProperty Name="Date_To" ColumnName="Date_To" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Add_Room" FunctionName="Хранилище KursDBModel.Add_Room" />
+          <FunctionImportMapping FunctionImportName="AddServiceToToR" FunctionName="Хранилище KursDBModel.AddServiceToToR" />
+          <FunctionImportMapping FunctionImportName="AllReservation" FunctionName="Хранилище KursDBModel.AllReservation" />
+          <FunctionImportMapping FunctionImportName="Delete_Comment" FunctionName="Хранилище KursDBModel.Delete_Comment" />
+          <FunctionImportMapping FunctionImportName="Delete_News" FunctionName="Хранилище KursDBModel.Delete_News" />
+          <FunctionImportMapping FunctionImportName="Delete_Room" FunctionName="Хранилище KursDBModel.Delete_Room" />
+          <FunctionImportMapping FunctionImportName="Delete_Service" FunctionName="Хранилище KursDBModel.Delete_Service" />
+          <FunctionImportMapping FunctionImportName="Delete_ToR" FunctionName="Хранилище KursDBModel.Delete_ToR" />
+          <FunctionImportMapping FunctionImportName="DeleteReserveTable" FunctionName="Хранилище KursDBModel.DeleteReserveTable" />
+          <FunctionImportMapping FunctionImportName="DeleteServiceFromTOR" FunctionName="Хранилище KursDBModel.DeleteServiceFromTOR" />
+          <FunctionImportMapping FunctionImportName="PagingNews" FunctionName="Хранилище KursDBModel.PagingNews">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KursDBModel.PagingNews_Result">
+                <ScalarProperty Name="Row" ColumnName="Row" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="News_ID" ColumnName="News_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище KursDBModel.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище KursDBModel.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище KursDBModel.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище KursDBModel.sp_helpdiagramdefinition" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище KursDBModel.sp_helpdiagrams" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище KursDBModel.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище KursDBModel.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="UpdateEntries" FunctionName="Хранилище KursDBModel.UpdateEntries" />
+          <FunctionImportMapping FunctionImportName="UpdateNews" FunctionName="Хранилище KursDBModel.UpdateNews" />
+          <FunctionImportMapping FunctionImportName="UpdateNote" FunctionName="Хранилище KursDBModel.UpdateNote" />
+          <FunctionImportMapping FunctionImportName="UpdatePassword" FunctionName="Хранилище KursDBModel.UpdatePassword" />
+          <FunctionImportMapping FunctionImportName="UpdateRoom" FunctionName="Хранилище KursDBModel.UpdateRoom" />
+          <FunctionImportMapping FunctionImportName="UpdateService" FunctionName="Хранилище KursDBModel.UpdateService" />
+          <FunctionImportMapping FunctionImportName="UpdateTOR" FunctionName="Хранилище KursDBModel.UpdateTOR" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

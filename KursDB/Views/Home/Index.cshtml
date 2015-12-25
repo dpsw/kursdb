@@ -1,0 +1,79 @@
+﻿@model IEnumerable<KursDB.Models.PagingNews_Result>
+
+@{
+    ViewBag.Title = "Site";
+    Layout = "~/Views/Shared/MainMasterPage.cshtml";
+}
+
+<center><h1>News</h1></center>
+
+    @if (Session["Admin"] != null)
+    {
+        <center>
+            <a class="btn btn-primary" data-toggle="modal" href="#myModal">Create New Note</a>
+        </center>
+    }
+    <br />
+
+    @foreach (var item in Model)
+    {
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    #@Html.DisplayFor(modelItem => item.Row)
+                    <br />
+                    @Html.DisplayFor(modelItem => item.Date)
+                    <br />
+                    @Html.DisplayFor(modelItem => item.Title)
+                </h3>
+            </div>
+            <div class="panel-body">
+                @Html.DisplayFor(modelItem => item.Description)
+            </div>
+        </div>
+        <center>
+            @if (Session["Admin"] != null)
+            {
+                <p>
+                    @Html.ActionLink("Edit", "Edit_News", new { item.News_ID }) |
+                @Html.ActionLink("Delete", "Delete_News", new { item.News_ID })
+            </p>
+            }
+        </center>
+        <br />
+    }
+
+<center>
+    <ul class="pagination">
+        @for (int @i = 1; @i <= @ViewBag.PagesCount; @i++ )
+        {
+             <li><a href="/Home/Index/?page=@i">@i</a></li>
+        }
+    </ul>
+</center>
+
+    <div class="modal" style="background-color:whitesmoke" id="myModal">
+        <div class="modal-header">
+            <center>
+                <h3 class="modal-title"> Create News </h3>
+            </center>
+        </div>
+        @using (Html.BeginForm("AddNews", "Home", FormMethod.Post))
+        {
+            <div class="modal-body">
+                <center>
+                    <input type="text" placeholder="Title of news..." class="form-control" name="Title">
+                    <br />
+                    <textarea class="form-control" name="News" placeholder="News..." rows="5" maxlength="1024"></textarea>
+                </center>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary" value="Add" />
+                <button class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        }
+    </div>
+
+    <script type="text/javascript">
+        $('#myModal').modal(options)
+    </script>

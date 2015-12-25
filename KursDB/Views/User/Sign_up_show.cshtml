@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Sign_up";
+    Layout = "~/Views/Shared/MainMasterPage.cshtml";
+}
+
+<center>
+    <h1>Sign up</h1>
+    @if (ViewBag.Error != null)
+    {
+        {
+            <div class="alert alert-danger">
+                <text>@ViewBag.Error</text>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            </div>
+        }
+    }
+
+    @using (Html.BeginForm("Sign_up", "User", FormMethod.Post, new { @class = "login" }))
+    {
+        <div class="form-group">
+            <label class="text-left" for="mail">E-Mail</label>
+            <input class="form-control" name="Email" id="mail" placeholder="Enter e-mail..." type="text">
+        </div>
+        <div class="form-group">
+            <label class="text-left" for="pass">Password</label>
+            <input class="form-control" name="Password" id="pass" placeholder="Enter password..." type="text">
+        </div>
+        <div class="form-group">
+            <label class="text-left" for="firstname">Name</label>
+            <input class="form-control" name="Name" id="firstname" placeholder="Enter your name..." type="text">
+        </div>
+        <div class="form-group">
+            <label class="text-left" for="lastname">Surname</label>
+            <input class="form-control" name="Surname" id="lastname" placeholder="Enter your surname..." type="text">
+        </div>
+        <div class="form-group">
+            <label class="text-left" for="mobi">Mobile</label>
+            <input class="form-control" name="Mobile" id="mobi" maxlength="11" placeholder="89*********" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">
+            Sign Up
+        </button>
+    }
+</center>
+

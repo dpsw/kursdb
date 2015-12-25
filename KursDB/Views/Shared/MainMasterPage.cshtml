@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/datepicker.css" rel="stylesheet" />
+    <link href="~/Content/datepicker3.css" rel="stylesheet" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>@ViewBag.Title</title>
+    <script src="~/Content/jquery.js" type="text/javascript"></script>
+    <script src="~/Content/bootstrap.js" type="text/javascript"></script>
+    <script src="~/Content/bootstrap-modal.js" type="text/javascript"></script>
+    <script src="~/Content/bootstrap-datepicker.js" type="text/javascript"></script>
+
+</head>
+<body>
+    <header>
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="#" class="navbar-brand disabled">Our coursework</a>
+                </div>
+                <div class="navbar-collapse collapse navbar-responsive-collapse" id="navbar-main">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/Home/Index/?page=1">Home</a></li>
+                        <li><a href="/Rooms/Show_all_rooms/">Rooms</a></li>
+                        <li><a href="/Guestbook/Show/">Guestbook</a></li>
+                        @if (Session["Name"] != null && Session["Surname"] != null && Session["User_ID"] != null && Session["Admin"] == null)
+                        {
+                            <li><a href="/Rooms/Orders/">Orders</a></li>
+                        }
+                        @if (Session["Admin"] != null)
+                        {
+                            <li><a href="/Admin/Type_of_rooms_show/">Type of rooms</a></li>
+                            <li><a href="/Admin/Services_show/">Services</a></li>
+                        }
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        @if (!(Session["Name"] != null && Session["Surname"] != null && Session["User_ID"] != null))
+                        {
+                            <li><a href="/User/Sign_up_show/">Sign Up</a></li>
+                            <li><a href="/User/Sign_in_show/">Sign In</a></li>
+                        }
+
+                        @if (Session["Name"] != null && Session["Surname"] != null && Session["User_ID"] != null)
+                        {
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    Hi, @Session["Name"] @Session["Surname"]!
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @if (Session["Admin"] != null)
+                                    {
+                                        <li><a>You Admin!</a></li>
+                                    }
+                                    @if (Session["Admin"] == null)
+                                    {
+                                        <li><a>You User!</a></li>
+                                    }
+                                    <li class="divider"></li>
+                                    <li><a href="/User/ChangePassword/">Change Password</a></li>
+                                    @if (Session["Admin"] != null)
+                                    {
+                                        <li><a href="/Admin/Show_All_Users/">Show all Users</a></li>
+                                        <li><a href="/Admin/Reserve_Out/">ReserveOut</a></li>
+                                    }
+                                </ul>
+                            </li>
+                            <li><a href="/User/Log_out/">LogOut</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="row">
+        <div class="col-md-3">
+            @if ((Session["Name"] != null && Session["Surname"] != null && Session["User_ID"] != null))
+            {
+                if (ViewBag.Title == "Show_all_rooms")
+                {
+                    <center>
+                        <div id="sort">
+                            <br />
+                            <br />
+                            <br />
+                            @using (Html.BeginForm("Show_all_rooms", "Rooms", FormMethod.Post))
+                            {
+                                <div class="form-group row" id="Price">
+                                    <h4>Price</h4>
+                                    <br />
+                                    <p class="col-md-3">From</p>
+                                    <input class="col-md-3" name="Price_from" type="number" value="@ViewBag.Price_from" step="10">
+                                    <p class="col-md-2">To</p>
+                                    <input class="col-md-4" name="Price_to" type="number" value="@ViewBag.Price_to" step="10">
+                                </div>
+                                
+                               <div class="form-group row" id="CoP">
+                                    <h4>Count of People</h4>
+                                    <br />
+                                    <p class="col-md-3">From</p>
+                                   <input class="col-md-3" name="CountPeople_from" type="number" value="@ViewBag.CoP_from" step="1">
+                                    <p class="col-md-2">To</p>
+                                   <input class="col-md-4" name="CountPeople_to" type="number" value="@ViewBag.CoP_to" step="1">
+                                </div>
+                                
+                                <div class="form-group row" id="Area">
+                                    <h4>Area</h4>
+                                    <br />
+                                    <p class="col-md-3">From</p>
+                                    <input class="col-md-3" name="Area_from" type="number" value="@ViewBag.Area_from" step="1">
+                                    <p class="col-md-2">To</p>
+                                    <input class="col-md-4" name="Area_to" type="number" value="@ViewBag.Area_to" step="1">
+                                </div>
+                                <input type="submit" value="Sort"/>
+                            }
+                        </div>
+                    </center>
+                }
+            }
+        </div>
+        <div class="col-md-6">@RenderBody()</div>
+        <div class="col-md-3"></div>
+    </div>
+    <footer></footer>
+</body>
+</html>

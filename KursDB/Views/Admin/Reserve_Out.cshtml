@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Reserve_Out";
+    Layout = "~/Views/Shared/MainMasterPage.cshtml";
+}
+
+<center>
+    <h2>Reserve Out</h2>
+    @if (ViewBag.OK != null)
+    {
+        {
+            <div class="alert alert-success">
+                <text>@ViewBag.OK</text>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            </div>
+        }
+    }
+
+    @using (Html.BeginForm("ReserveOut", "Admin", FormMethod.Post))
+    {
+        <div>
+            <p>Date From:</p><input data-date-format="dd-mm-yyyy" type="datetime" class="span2" id="dpd1" name="DateFrom" />
+            <p>Date To:</p><input data-date-format="dd-mm-yyyy" type="datetime" class="span2" id="dpd2" name="DateTo" />
+            </div>
+            <div>
+                <br />
+                <input type="submit" class="btn btn-primary" value="Save File" />
+            </div>
+            }
+    </center>
+
+<script type="text/javascript">
+    $('.datepicker').datepicker();
+</script>
+<script type="text/javascript">
+    var nowTemp = new Date();
+    var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+    var checkin = $('#dpd1').datepicker({
+        onRender: function (date) {
+            return date.valueOf() < now.valueOf() ? 'disabled' : '';
+        }
+    }).on('changeDate', function (ev) {
+        checkin.hide();
+    }).data('datepicker');
+    var checkout = $('#dpd2').datepicker({
+        onRender: function (date) {
+            return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+        }
+    }).on('changeDate', function (ev) {
+        checkout.hide();
+    }).data('datepicker');
+</script>

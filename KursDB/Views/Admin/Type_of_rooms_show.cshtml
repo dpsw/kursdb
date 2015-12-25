@@ -1,0 +1,114 @@
+﻿@model IEnumerable<KursDB.Models.ToRWithServices>
+
+@{
+    ViewBag.Title = "Type of rooms show";
+    Layout = "~/Views/Shared/MainMasterPage.cshtml";
+}
+
+<center><h1>Type of rooms show</h1></center>
+
+<center>
+    <a class="btn btn-primary" data-toggle="modal" href="#myModal">Create New Type</a>
+</center>
+<br />
+
+@foreach (var item in Model)
+{
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Type: @Html.DisplayFor(modelItem => item.Title)
+            </h3>
+        </div>
+        <div class="panel-body">
+            <p class="example-1">
+                Price: @Html.DisplayFor(modelItem => item.Price)
+                <br />
+                Area: @Html.DisplayFor(modelItem => item.Area)
+                <br />
+                Count of people: @Html.DisplayFor(modelItem => item.CoP)
+                <br />
+                <a title="" href="#"
+                   data-toggle="tooltip"
+                   data-placement="right"
+                   data-original-title="@item.Services">
+                    Service List
+
+                </a>
+                <br />
+
+                @using (Html.BeginForm("AddServiceToToR", "Admin", FormMethod.Post))
+                {
+                    <input type="submit" id="id_@item.ToR_ID" value="Add service" />
+                    <select id="select_@item.ToR_ID" name="serviceTitle">
+                        @foreach (var @service in item.AllOtherServices)
+                        {
+                            <option>@service.Title</option>
+                        }
+                    </select>
+                    <input type="hidden" name="idToR" value="@item.ToR_ID" />
+
+                }
+                <br />
+                @using (Html.BeginForm("DeleteServiceFromToR", "Admin", FormMethod.Post))
+                {
+                    <input type="submit" id="id_@item.ToR_ID" value="Delete service" />
+                    <select id="select_@item.ToR_ID" name="serviceTitle">
+                        @foreach (var @service in item.services)
+                        {
+                            <option>@service.Title</option>
+                        }
+                    </select>
+                    <input type="hidden" name="idToR" value="@item.ToR_ID" />
+
+                }
+            </p>
+            </div>
+        </div>
+    <center>
+        @Html.ActionLink("Edit", "Edit_TOR", new { item.ToR_ID }) |
+         @Html.ActionLink("Delete", "Delete_ToR", new { item.ToR_ID })
+    </center>
+    <br />
+}
+
+
+            <div class="modal" style="background-color:whitesmoke" id="myModal">
+                <div class="modal-header">
+                    <center>
+                        <h3>Create New Type of Room</h3>
+                    </center>
+                </div>
+                @using (Html.BeginForm("AddToR", "Admin", FormMethod.Post))
+    {
+                    <div class="modal-body">
+                        <center>
+                            <input type="text" placeholder="Enter title..." class="form-control" name="Title">
+                            <br />
+                            <input type="text" placeholder="Enter price..." class="form-control" name="Price">
+                            <br />
+                            <input type="text" placeholder="Enter area..." class="form-control" name="Area">
+                            <br />
+                            <input type="text" placeholder="Enter count of people..." class="form-control" name="CoP">
+                        </center>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary" value="Add" />
+                        <button class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+    }
+            </div>
+
+            <script type="text/javascript">
+                $('#myModal').modal(options)
+            </script>
+
+<script>
+    jQuery(document).ready(function ($) {
+        $('.example-1').tooltip({
+            trigger: "hover",
+            selector: "a[data-toggle=tooltip]"
+        })
+    })</script>
+
+
